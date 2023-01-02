@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonces{% endblock %}
+
+{% block body %}
+<br>
+<br>
+<br>
+ <div class="container">
+    <h1>Annonce</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Categorie</th>
+                <td>{{ annonce.categorie.nom }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ annonce.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ annonce.description }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ annonce.prix }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img class="img" src="{{ vich_uploader_asset(annonce, 'imageFile') }}"></td>
+            </tr>
+            <tr>
+                <th>DateCreation</th>
+                <td>{{ annonce.dateCreation ? annonce.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateModification</th>
+                <td>{{ annonce.dateModification ? annonce.dateModification|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="{{ path('app_annonces_edit', {'id': annonce.id}) }}" >
+        <button class="btn text-white mt-2 pull-right"style="width:150px; height:40px; border-radius: 0px; ">Edit</button>
+    </a>
+    <a href="{{ path('app_annonces_index') }}" >
+        <button class="btn text-white mt-2 pull-right"style="width:150px; height:40px; border-radius: 0px; margin:15px">back </button>
+    </a>
+                            
+                       
+
+</div>
+<br>
+<br>
+<br>
+{% endblock %}

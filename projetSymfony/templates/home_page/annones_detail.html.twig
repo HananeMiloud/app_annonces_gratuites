@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+ <div class="site-wrap">      
+    <section class="site-section py-lg">
+      <div class="container">
+        
+        <div class="row blog-entries element-animate">
+
+          <div class="col-md-12 col-lg-8 main-content">
+            
+            <div class="post-content-body">
+            <div class="row mb-5 mt-5">
+              <h1>{{annones_detail.titre}}</h1>
+              <br>
+              <br>
+              <div class="col-md-12 mb-4">
+                <img class="img-fluid rounded" src="{{ vich_uploader_asset(annones_detail, 'imageFile') }}">
+              </div>
+            </div>
+            <p>{{annones_detail.description}}</p>
+            </div>
+
+
+            <div class="pt-5">
+              <h3 class="mb-5">{{annones_detail.commentaires|length()}} Comments</h3>
+              {% for commentaires in annones_detail.commentaires %}
+              <ul class="comment-list">
+                <li class="comment">
+
+                  <div class="vcard">
+                    {% if commentaires.user.image == null %}
+                        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAIYAhgMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABQYCAwQBB//EADcQAAICAQICBQoFBAMAAAAAAAABAgMEBRExQRIhUWFxBhMiIzJCgaHB4RRSkdHwc4KSsjM1Q//EABQBAQAAAAAAAAAAAAAAAAAAAAD/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwD7iAAAAAAAAAAAAAAAAAAAAAAAAAAABjbZCqEp2SUYRW7b5AZMi83W8bG3jX66xco8F8SI1TV7MtuuluFHzl4/sRgEjka1m3N9Gaqj2QX1OKy+63/ktnLxk2awAN1WXk1bebvsjt2SZpAEti6/lVNK9Ruj4bS+ROYOpY+bsq5dGf5JdT+5TQm0002muDTAvwIDSda6TjRmS631RsfPxJ8AAAAAAAAAVTW9ReXc6qpeog/8n2kvr+Z+Gw+hB7WW+ituS5v+dpVQAAAAJOTSSbb6kkSmNol1i6V81UuzbdgRYJ16DVt1XzT70jgzNLyMWLnt5yte9Hl4oDhAAAsWgak7UsW+W84r1cnzXYV0yqnKqyM63tKL3T7wL4DRhZEcrFruhwmuHY+aN4AAAAABUtfvd2ozjv6NaUF9SOM8ifnL7J/mk38zAAAAJ7Q8KMKlk2R9OfsdyJYxrioVwiuEYpfIyAAACuazhxxrlZUtqrOXYyOLLrkU9Om37rUl+v3K0AAAFg8l724XY7fstTj8eP0J4qnk7Po6nFfng4/X6FrAAAAAAKCDdm1+ay7q/wAs2vmaQB4egC24NyyMSqxc1s/FcTeVjS894U3Ga3plxS5d5ZKbq74dOmanHuAzAOfLzacSPrJby5QXFgcflBco4kafeslv8EV83ZeTPKvdtnF8EuS7DSAAAHfoP/a0f3f6st5VvJuvp6g58oQf6vqLSAAAAAAVfykx3VmxuS9G2PzXV+xEly1XD/G4kq17cfSh4lNaabTWzT2a7AB7GLnJRim5N7JLme1VztsjXXFynJ7JIs2n4FeHDfqla/an9F3ARmLols0pZE1Wn7q65fYys0bIpn0sS3f49Fk6AIB4mrS9F22bf1vubKdDk95ZF+0nygt/mybAFazNKyMZOUfW1r3o8V4o4C6ERq2lqyMr8aO011ygve8O8CCAN2HjTy8iFMOL4vsXaBP+TWP5vEndJbO2XV4L77kyYVVxqqjXWtoxSSXcZgAAAAAAgNe0xyby8ePX/wCkUuPeT4fWBAaDiKun8TNelP2e5fclTbKpbegku41NbPZ9QAAAAAAAPYxcnsgK7rGE68qMqYNq59UUve/nWTWj6esGneezun7T7O5HdGuK2bSbXMzAAAAAAAAAAAAeSipcUegDU6ux/qYuuRvAHP5uXYeqqXPY3gDWqkuPWZ7bHoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//9k="   alt="Maxwell Admin"> 
+                    {% else %}
+                        <img src="{{asset('/uploads/'~ commentaires.user.image)}}" alt="Maxwell Admin"> 
+                    {% endif %}
+                  </div>
+
+                  <div class="comment-body">
+                    <h3>{{commentaires.user.nom}} {{commentaires.user.prenom}}</h3>
+                    <div class="meta">{{commentaires.createdAt|date("d/m/y H:i")}}</div>
+                    <p>{{commentaires.content}}</p>
+                  
+                  </div>
+                </li>
+              </ul>
+              {% endfor %}
+              <!-- END comment-list -->
+              
+              <div class="comment-form-wrap pt-5">
+                <h3 class="mb-5">Leave a comment</h3>
+                <div class="form-group bg-light" id="ajout-commentaire" >
+                     {{ form(form) }}
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- END main-content -->
+
+          <div class="col-md-12 col-lg-4 sidebar">
+            <div class="sidebar-box search-form-wrap">
+              <form action="#" class="search-form">
+                <div class="form-group">
+                  <span class="icon fa fa-search"></span>
+                  <input type="text" class="form-control" id="s" placeholder="Type a keyword and hit enter">
+                </div>
+              </form>
+            </div>
+            <!-- END sidebar-box -->
+            <div class="sidebar-box">
+              <div class="bio text-center">
+                <img src="{{asset('/uploads/'~ annones_detail.annonceur.image)}}" alt="Image Placeholder" class="img-fluid mb-5">
+                <div class="bio-body">
+                    <h2>{{annones_detail.annonceur}}</h2>
+                    <h6>{{annones_detail.annonceur.email}}</h6>
+                    <p class="mb-4">{{annones_detail.annonceur.description}}</p>
+                </div>
+              </div>
+            </div>
+             <!-- END sidebar-box -->  
+            <div class="sidebar-box">
+              <h3 class="heading">Popular Posts</h3>
+              <div class="post-entry-sidebar">
+               {% for annonces in annonces %}
+                <ul>
+                  <li>
+                    <a href="{{path('app_annonce_detail', {'id':annonces.id})}}">
+                      <img src="{{ vich_uploader_asset(annonces, 'imageFile') }}" alt="Image placeholder" class="mr-4">
+                      <div class="text" style="padding-left: 20px">
+                        <h4>{{annonces.titre|slice(0,20)}}...</h4>
+                        <div class="post-meta">
+                          <span class="mr-2">{{annonces.dateCreation|date("d/m/y H:i")}}</span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+                   {% endfor %}
+              </div>
+            </div>
+            <!-- END sidebar-box -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+{% endblock %}
+

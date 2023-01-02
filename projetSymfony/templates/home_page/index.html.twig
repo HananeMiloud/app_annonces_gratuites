@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomePageController!{% endblock %}
+
+{% block body %}
+
+
+<div class="site-wrap ">
+  
+<section class="hero-area bg-1 text-center overly" style="background-image:url('{{ asset('assets/images/hero.jpg') }}') "  >
+	<!-- Container Start -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<!-- Header Contetnt -->
+				<div class="content-block">
+				
+					<p>Join the millions who buy and sell from each other <br> everyday in local communities around the world</p>
+					
+				</div>
+				<!-- Advance Search -->
+				<div class="advance-search ">
+         
+          {{ form_start(form) }}
+                            <div class="row " >
+                                <!-- Store Search -->
+                                <div class="col-md-12"style=" flex: 0 0 auto;width:430px">
+                                    <div class="block d-flex">
+                                          {{ form_row(form.mots) }} 
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="block d-flex">
+                                          {{ form_row(form.categorie) }}
+                                           {{ form_end(form) }}
+                                    </div>
+                                </div>
+                            </div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<!-- Container End -->
+</section>
+<br>
+<br>
+<br>
+
+<div class="site-section">
+    <div class="container">
+        <div class="row mb-5">
+          <div class="col-12">
+            <h2>Annonces : ({{ annonces.getTotalItemCount }})</h2>
+          </div>
+        </div>
+        <div class="row">
+         {% for annonces in annonces %}
+          <div class="col-lg-4 mb-4">
+            <div class="entry2">
+              <a href="{{path('app_annonce_detail', {'id':annonces.id})}}">
+                <img class="img-fluid rounded" src="{{ vich_uploader_asset(annonces, 'imageFile') }}">
+              </a>
+              <div class="excerpt">
+                <span class="post-category text-white bg-success mb-3">{{annonces.categorie.nom}}</span>
+                {% if annonces.prix == null %}
+               
+                {% else %}
+                  <span class="post-category text-white bg-warning mb-3">{{annonces.prix}}</span>
+                {% endif %}
+                <h4><a href="{{path('app_annonce_detail', {'id':annonces.id})}}">{{annonces.titre|slice(0,50)}}...</a></h4>
+                <div class="post-meta align-items-center text-left clearfix">
+                   <span class="author-figure mb-0 mr-3 float-left" style="margin-right:10px "> 
+                    {% if annonces.annonceur.image == null %}
+                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAIYAhgMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABQYCAwQBB//EADcQAAICAQICBQoFBAMAAAAAAAABAgMEBRExQRIhUWFxBhMiIzJCgaHB4RRSkdHwc4KSsjM1Q//EABQBAQAAAAAAAAAAAAAAAAAAAAD/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwD7iAAAAAAAAAAAAAAAAAAAAAAAAAAABjbZCqEp2SUYRW7b5AZMi83W8bG3jX66xco8F8SI1TV7MtuuluFHzl4/sRgEjka1m3N9Gaqj2QX1OKy+63/ktnLxk2awAN1WXk1bebvsjt2SZpAEti6/lVNK9Ruj4bS+ROYOpY+bsq5dGf5JdT+5TQm0002muDTAvwIDSda6TjRmS631RsfPxJ8AAAAAAAAAVTW9ReXc6qpeog/8n2kvr+Z+Gw+hB7WW+ituS5v+dpVQAAAAJOTSSbb6kkSmNol1i6V81UuzbdgRYJ16DVt1XzT70jgzNLyMWLnt5yte9Hl4oDhAAAsWgak7UsW+W84r1cnzXYV0yqnKqyM63tKL3T7wL4DRhZEcrFruhwmuHY+aN4AAAAABUtfvd2ozjv6NaUF9SOM8ifnL7J/mk38zAAAAJ7Q8KMKlk2R9OfsdyJYxrioVwiuEYpfIyAAACuazhxxrlZUtqrOXYyOLLrkU9Om37rUl+v3K0AAAFg8l724XY7fstTj8eP0J4qnk7Po6nFfng4/X6FrAAAAAAKCDdm1+ay7q/wAs2vmaQB4egC24NyyMSqxc1s/FcTeVjS894U3Ga3plxS5d5ZKbq74dOmanHuAzAOfLzacSPrJby5QXFgcflBco4kafeslv8EV83ZeTPKvdtnF8EuS7DSAAAHfoP/a0f3f6st5VvJuvp6g58oQf6vqLSAAAAAAVfykx3VmxuS9G2PzXV+xEly1XD/G4kq17cfSh4lNaabTWzT2a7AB7GLnJRim5N7JLme1VztsjXXFynJ7JIs2n4FeHDfqla/an9F3ARmLols0pZE1Wn7q65fYys0bIpn0sS3f49Fk6AIB4mrS9F22bf1vubKdDk95ZF+0nygt/mybAFazNKyMZOUfW1r3o8V4o4C6ERq2lqyMr8aO011ygve8O8CCAN2HjTy8iFMOL4vsXaBP+TWP5vEndJbO2XV4L77kyYVVxqqjXWtoxSSXcZgAAAAAAgNe0xyby8ePX/wCkUuPeT4fWBAaDiKun8TNelP2e5fclTbKpbegku41NbPZ9QAAAAAAAPYxcnsgK7rGE68qMqYNq59UUve/nWTWj6esGneezun7T7O5HdGuK2bSbXMzAAAAAAAAAAAAeSipcUegDU6ux/qYuuRvAHP5uXYeqqXPY3gDWqkuPWZ7bHoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//9k=" alt="Image" class="img-fluid" style="width:30">
+                    {% else %}
+                    <img src="{{asset('/uploads/'~ annonces.annonceur.image)}}" alt="Image" class="img-fluid" style="width:30">
+                    {% endif %}
+                   </span>
+                   <span class="d-inline-block mt-1">By <a href="#">{{annonces.annonceur}}</a></span>
+                   <span>&nbsp;-&nbsp;{{annonces.dateCreation|date("d/m/y H:i")}}</span>
+                </div>
+
+                <p>{{annonces.description|slice(0,150)}}...</p>
+                 <span >
+                 <a href="{{path('app_annonce_detail', {'id':annonces.id})}}">Read More</a>
+                 </span> 
+              </div>
+            </div>
+          </div>
+         {% endfor %}
+        </div>
+        <div class="row text-center pt-5 border-top">
+          <div class="col-md-12">
+              {{ knp_pagination_render(annonces,'pagination/pagination.html.twig') }}
+          </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

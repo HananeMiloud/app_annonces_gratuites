@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %} {% block title %}Hello UserController!{% endblock %} {% block body %}
+
+<section class="form bg-light">
+<br>
+    <div class="container">    
+            <div class="row gutters">
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                <div class="card h-90">
+                    <div class="card-body">
+                        <div class="account-settings">
+                            <div class="user-profile">
+                            <br>
+                                <div class="user-avatar">
+                                
+                                    <img src="{{asset('/uploads/'~ app.user.image)}}" alt="Maxwell Admin">
+                               
+                                </div>
+                                <h5 class="user-name">{{ app.user.nom }} {{ app.user.prenom }}</h5>
+                                <h6 class="user-email">{{ app.user.email }}</h6>
+                            </div>
+                            <div class="about">
+                                <h5>About</h5>
+                                <p>{{ app.user.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+                    <div class="list-group">
+    
+                        <a href="{{ path('app_user') }}" class="list-group-item list-group-item-action active" style=" color:white;background-color: black;"><i class="fa fa-user-o" style="margin-right:10px"></i>Profile</a>
+                        <a  href="{{ path('app_annonces_index')}}" class="list-group-item list-group-item-action"><i class='fa fa-th-list'style="margin-right:10px"></i>Mes annonces</a>
+                        <a  href="{{ path('app_userPass') }}" class="list-group-item list-group-item-action"><i class='fa fa-edit'style="margin-right:10px"></i>Edit password</a>
+                        <a  href="{{ path('app_logout') }}" class="list-group-item list-group-item-action"><i class='fa fa-sign-out'style="margin-right:10px"></i>Se déconnecter</a>
+                      
+                    </div>
+                    
+
+                </div>
+            </div>
+            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                <div class="card h-100">
+                    <div class="card-body" style="padding:25px 30px">
+                        {{ form_start(form) }}
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h6 class="mb-2">Personal Details</h6>
+                            </div>
+                            
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    {{ form_row(form.nom , {'attr' : {'class' : 'form-control'}}) }} {{ form_row(form.prenom , {'attr' : {'class' : 'form-control'}}) }}
+
+                                </div>
+                            </div>
+                            
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    {{ form_row(form.email , {'attr' : {'class' : 'form-control'}}) }} {{ form_row(form.phone , {'attr' : {'class' : 'form-control'}}) }}
+
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    {{ form_row(form.image , {'attr' : {'class' : 'form-control'}}) }} 
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h6 class="mt-3 mb-2 ">Address</h6>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    {{ form_row(form.pays , {'attr' : {'class' : 'form-control'}}) }} {{ form_row(form.region , {'attr' : {'class' : 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group"> {{ form_row(form.ville , {'attr' : {'class' : 'form-control'}}) }} {{ form_row(form.code_postal , {'attr' : {'class' : 'form-control'}}) }}
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h6 class="mt-3 mb-2 ">About me</h6>
+                            </div>
+                            <div class=" ">
+                                <div class="mb-3">
+                                    {{ form_row(form.description , {'attr' : {'class' : 'form-control','style':'height:100px'}}) }}
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        {{ form_end(form) }}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+</section>
+ {% endblock %}
